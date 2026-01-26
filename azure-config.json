@@ -1,0 +1,19 @@
+{
+  "resourceGroup": "fatemeh-bahman-rg",
+  "location": "northeurope",
+  "appServicePlan": {
+    "name": "fatemeh-bahman-plan",
+    "sku": "F1",
+    "tier": "Free"
+  },
+  "webApp": {
+    "name": "fatemeh-bahman-website",
+    "runtime": "NODE:20-lts",
+    "os": "linux"
+  },
+  "notes": {
+    "region": "North Italy (northeurope)",
+    "cost": "Free tier (F1)",
+    "limitations": "App may sleep after inactivity, 60 minutes compute per day"
+  }
+}
