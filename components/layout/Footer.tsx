@@ -29,12 +29,13 @@ export function Footer() {
   const content = footerContent[language]
 
   return (
-    <footer className="bg-navy-900 dark:bg-navy-950 text-beige-50 section-padding">
-      <div className="container-custom">
+    <footer className="relative bg-navy-950 dark:bg-navy-950 text-beige-50 section-padding overflow-hidden">
+      <div className="absolute inset-0 bg-mesh-dark opacity-60 pointer-events-none" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold-500/50 to-transparent" />
+      <div className="container-custom relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-          {/* Bio */}
           <div>
-            <h3 className="text-xl font-bold mb-4 font-persian">فاطمه بهمن</h3>
+            <h3 className="text-xl font-bold mb-4 font-persian gradient-text">فاطمه بهمن</h3>
             <p className="text-beige-200 text-sm leading-relaxed">
               {content.bio}
             </p>
@@ -111,10 +112,10 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-navy-700 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="border-t border-navy-700/80 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-beige-300 text-sm">{content.rights}</p>
-          <p className="text-beige-300 text-sm flex items-center gap-1">
-            {content.madeWith} <Heart className="w-4 h-4 text-red-500" />
+          <p className="text-beige-300 text-sm flex items-center gap-1.5">
+            {content.madeWith} <Heart className="w-4 h-4 text-gold-400 animate-pulse" />
           </p>
         </div>
       </div>

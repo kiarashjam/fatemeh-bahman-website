@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { DM_Sans, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
@@ -10,7 +10,8 @@ import { BackToTop } from '@/components/ui/BackToTop'
 import { SkipToContent } from '@/components/ui/SkipToContent'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans', weight: ['400', '500', '600', '700'] })
+const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair', weight: ['400', '500', '600', '700'] })
 
 export const metadata: Metadata = {
   title: {
@@ -60,7 +61,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body className={`${dmSans.variable} ${playfair.variable} font-sans antialiased`}>
         <ErrorBoundary>
           <ThemeProvider>
             <LanguageProvider>

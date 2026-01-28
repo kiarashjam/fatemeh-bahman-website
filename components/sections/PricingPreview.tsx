@@ -33,7 +33,7 @@ export function PricingPreview() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-navy-900 dark:text-beige-50">
+          <h2 className="section-title mb-4 section-title-accent">
             {langContent.title}
           </h2>
           <p className="text-lg text-navy-600 dark:text-beige-300">
@@ -47,7 +47,7 @@ export function PricingPreview() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="bg-gradient-to-br from-gold-50 to-emerald-50 dark:from-navy-700 dark:to-navy-600 p-8 rounded-2xl mb-8"
+            className="glass-card bg-gradient-to-br from-gold-50/80 to-emerald-50/80 dark:from-navy-700/80 dark:to-navy-600/80 p-8 rounded-2xl mb-8 card-hover"
           >
             <p className="text-navy-700 dark:text-beige-200 mb-6 text-lg">
               {language === 'en'
@@ -56,7 +56,7 @@ export function PricingPreview() {
             </p>
             <Link
               href="/pricing"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gold-500 hover:bg-gold-600 text-white rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gold-500 hover:bg-gold-600 text-white rounded-full font-semibold transition-all duration-300 hover:shadow-glow-gold hover:scale-[1.02]"
             >
               {langContent.cta}
               <ArrowRight className="w-5 h-5" />

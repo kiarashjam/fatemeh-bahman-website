@@ -43,7 +43,7 @@ export function FAQPreview() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-navy-900 dark:text-beige-50">
+          <h2 className="section-title mb-4 section-title-accent">
             {langContent.title}
           </h2>
           <p className="text-lg text-navy-600 dark:text-beige-300">
@@ -60,7 +60,7 @@ export function FAQPreview() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
-                className="flex items-start gap-4 bg-white dark:bg-navy-700 p-6 rounded-lg border border-navy-100 dark:border-navy-600"
+                className="flex items-start gap-4 glass-card p-6 rounded-xl card-hover"
               >
                 <HelpCircle className="w-6 h-6 text-gold-500 flex-shrink-0 mt-1" />
                 <p className="text-navy-700 dark:text-beige-200 font-medium">
@@ -79,7 +79,7 @@ export function FAQPreview() {
           >
             <Link
               href="/faq"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-navy-900 dark:bg-navy-700 hover:bg-navy-800 dark:hover:bg-navy-600 text-white rounded-lg font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-navy-900 dark:bg-navy-700 hover:bg-navy-800 dark:hover:bg-navy-600 text-white rounded-full font-semibold transition-all duration-300 hover:shadow-premium hover:scale-[1.02]"
             >
               {langContent.cta}
               <ArrowRight className="w-5 h-5" />

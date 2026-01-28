@@ -3,8 +3,9 @@
 @tailwind utilities;
 
 :root {
-  --font-inter: 'Inter', system-ui, sans-serif;
   --font-vazir: 'Vazir', 'Tahoma', 'Arial', sans-serif;
+  --gradient-gold-emerald: linear-gradient(135deg, #f1c40f 0%, #2ecc71 100%);
+  --gradient-hero: linear-gradient(135deg, rgba(250, 249, 247, 1) 0%, rgba(245, 243, 240, 0.98) 50%, rgba(235, 231, 224, 1) 100%);
 }
 
 @layer base {
@@ -24,12 +25,10 @@
     direction: ltr;
   }
 
-  /* Focus visible for better keyboard navigation */
   *:focus-visible {
     @apply outline-none ring-2 ring-gold-500 ring-offset-2 ring-offset-white dark:ring-offset-navy-900;
   }
 
-  /* Reduced motion support */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -52,11 +51,31 @@
   }
   
   .gradient-text {
-    @apply bg-gradient-to-r from-gold-500 to-emerald-500 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-gold-500 via-gold-400 to-emerald-500 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient;
+  }
+  
+  .section-title {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-bold text-navy-900 dark:text-beige-50 font-display;
+  }
+  
+  .section-title-accent {
+    @apply relative inline-block after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:h-1 after:w-16 after:rounded-full after:bg-gradient-to-r after:from-gold-500 after:to-emerald-500;
   }
   
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+    @apply transition-all duration-300 hover:shadow-premium dark:hover:shadow-premium-dark hover:-translate-y-1;
+  }
+  
+  .glass-card {
+    @apply bg-white/80 dark:bg-navy-800/80 backdrop-blur-xl border border-white/20 dark:border-navy-600/50 shadow-glass dark:shadow-glass-dark;
+  }
+  
+  .btn-primary {
+    @apply px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:shadow-glow-gold hover:scale-[1.02] active:scale-[0.98];
+  }
+  
+  .btn-secondary {
+    @apply px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:shadow-glow-emerald hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2;
   }
 }
 

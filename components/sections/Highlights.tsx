@@ -17,7 +17,7 @@ export function Highlights() {
   const langContent = content[language]
 
   return (
-    <section className="section-padding bg-white dark:bg-navy-800">
+    <section className="section-padding bg-beige-50/50 dark:bg-navy-900/50">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -35,10 +35,10 @@ export function Highlights() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
-                className="bg-beige-50 dark:bg-navy-700 p-6 rounded-xl card-hover"
+                className="glass-card p-6 rounded-2xl card-hover"
               >
-                <div className="w-12 h-12 bg-gold-100 dark:bg-gold-900/30 rounded-lg flex items-center justify-center mb-4">
-                  <Icon className="w-6 h-6 text-gold-600 dark:text-gold-400" />
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-gold-100 to-gold-200 dark:from-gold-900/40 dark:to-gold-800/30 flex items-center justify-center mb-4 shadow-inner">
+                  <Icon className="w-7 h-7 text-gold-600 dark:text-gold-400" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-navy-900 dark:text-beige-50">
                   {highlight.title}

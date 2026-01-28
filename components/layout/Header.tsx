@@ -49,7 +49,7 @@ export function Header() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         scrolled
-          ? 'bg-white/95 dark:bg-navy-900/95 backdrop-blur-md shadow-md'
+          ? 'bg-white/80 dark:bg-navy-900/80 backdrop-blur-xl border-b border-navy-100/50 dark:border-navy-700/50 shadow-glass'
           : 'bg-transparent'
       )}
     >
@@ -57,21 +57,20 @@ export function Header() {
         <div className="flex items-center justify-between">
           <Link
             href="/"
-            className="text-2xl font-bold gradient-text font-persian"
+            className="text-2xl font-bold gradient-text font-persian tracking-tight"
           >
             فاطمه بهمن
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <Link
                 key={item.key}
                 href={item.href}
                 className={cn(
-                  'text-sm font-medium transition-colors hover:text-gold-500',
+                  'text-sm font-medium transition-colors duration-200 relative py-1 after:content-[""] after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-gold-500 after:to-emerald-500 after:transition-all after:duration-300 hover:after:w-full',
                   pathname === item.href
-                    ? 'text-gold-500 dark:text-gold-400'
+                    ? 'text-gold-500 dark:text-gold-400 after:w-full'
                     : 'text-navy-700 dark:text-beige-200'
                 )}
               >
@@ -80,22 +79,21 @@ export function Header() {
             ))}
           </div>
 
-          {/* Actions */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-3">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-navy-100 dark:hover:bg-navy-800 transition-colors"
+              className="p-2.5 rounded-xl hover:bg-navy-100 dark:hover:bg-navy-800 transition-colors"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? (
-                <Sun className="w-5 h-5" />
+                <Sun className="w-5 h-5 text-gold-400" />
               ) : (
-                <Moon className="w-5 h-5" />
+                <Moon className="w-5 h-5 text-navy-600" />
               )}
             </button>
             <button
               onClick={toggleLanguage}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-navy-100 dark:bg-navy-800 hover:bg-navy-200 dark:hover:bg-navy-700 transition-colors text-sm font-medium"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-navy-100 dark:bg-navy-800 hover:bg-navy-200 dark:hover:bg-navy-700 transition-colors text-sm font-medium border border-transparent hover:border-navy-200 dark:hover:border-navy-600"
               aria-label={language === 'en' ? 'Switch to Persian' : 'تغییر به انگلیسی'}
             >
               <Languages className="w-4 h-4" />
@@ -103,7 +101,7 @@ export function Header() {
             </button>
             <Link
               href="/contact"
-              className="px-6 py-2 bg-gold-500 hover:bg-gold-600 text-white rounded-lg font-medium transition-colors"
+              className="px-6 py-2.5 bg-gold-500 hover:bg-gold-600 text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-glow-gold"
             >
               {language === 'en' ? 'Book Lesson' : 'رزرو درس'}
             </Link>

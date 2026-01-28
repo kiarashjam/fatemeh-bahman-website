@@ -31,7 +31,7 @@ export function Testimonials() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-navy-900 dark:text-beige-50">
+          <h2 className="section-title mb-4 section-title-accent">
             {language === 'en' ? 'What Students Say' : 'نظرات دانش‌آموزان'}
           </h2>
           <p className="text-lg text-navy-600 dark:text-beige-300">
@@ -49,7 +49,7 @@ export function Testimonials() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.3 }}
-              className="bg-beige-50 dark:bg-navy-700 p-8 sm:p-12 rounded-2xl shadow-lg"
+              className="glass-card p-8 sm:p-12 rounded-2xl"
             >
               <div className="flex gap-1 mb-4">
                 {[...Array(langContent.testimonials[currentIndex].rating)].map((_, i) => (

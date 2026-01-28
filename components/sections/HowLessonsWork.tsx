@@ -9,7 +9,7 @@ export function HowLessonsWork() {
   const langContent = content[language]
 
   return (
-    <section className="section-padding bg-gradient-to-br from-navy-900 to-navy-800 dark:from-navy-950 dark:to-navy-900 text-beige-50">
+    <section className="relative section-padding overflow-hidden bg-gradient-to-br from-navy-900 to-navy-800 dark:from-navy-950 dark:to-navy-900 text-beige-50">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -18,7 +18,7 @@ export function HowLessonsWork() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+          <h2 className="section-title mb-4 section-title-accent text-beige-50">
             {langContent.howLessonsWork.title}
           </h2>
           <p className="text-lg text-beige-200 max-w-2xl mx-auto">
@@ -36,7 +36,7 @@ export function HowLessonsWork() {
               transition={{ delay: index * 0.2, duration: 0.6 }}
               className="relative"
             >
-              <div className="bg-navy-800 dark:bg-navy-700 p-8 rounded-xl border border-navy-700 dark:border-navy-600">
+              <div className="bg-navy-800/80 dark:bg-navy-700/80 backdrop-blur-sm p-8 rounded-2xl border border-navy-700/80 dark:border-navy-600/80 card-hover">
                 <div className="text-5xl font-bold text-gold-400 mb-4 opacity-50">
                   {step.number}
                 </div>
