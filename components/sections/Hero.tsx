@@ -62,7 +62,7 @@ export function Hero() {
                 {langContent.hero.ctaPrimary}
               </Link>
               <a
-                href="https://wa.me/1234567890"
+                href="https://wa.me/393758212541"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-secondary bg-emerald-500 hover:bg-emerald-600 text-white"

@@ -3,13 +3,14 @@
 import { MessageCircle } from 'lucide-react'
 import { useLanguage } from '@/lib/contexts/LanguageContext'
 import { cn } from '@/lib/utils'
+import { SITE_CONFIG } from '@/lib/constants'
 
 export function FloatingWhatsApp() {
   const { language } = useLanguage()
 
   return (
     <a
-      href="https://wa.me/1234567890"
+      href={SITE_CONFIG.whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
       className={cn(

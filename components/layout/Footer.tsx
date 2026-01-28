@@ -69,20 +69,20 @@ export function Footer() {
             <h4 className="text-lg font-semibold mb-4">{content.contact}</h4>
             <div className="space-y-1">
               <a
-                href="mailto:fatemeh.bahman@gmail.com"
+                href="mailto:fatemeh.bahman40@gmail.com"
                 className="flex items-center gap-2 py-3 text-beige-200 hover:text-gold-400 transition-colors text-sm min-h-[44px] touch-manipulation -mx-2 px-2 rounded-lg hover:bg-white/5"
               >
                 <Mail className="w-4 h-4 shrink-0" />
-                <span className="break-all">fatemeh.bahman@gmail.com</span>
+                <span className="break-all">fatemeh.bahman40@gmail.com</span>
               </a>
               <a
-                href="https://wa.me/1234567890"
+                href="https://wa.me/393758212541"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 py-3 text-beige-200 hover:text-gold-400 transition-colors text-sm min-h-[44px] touch-manipulation -mx-2 px-2 rounded-lg hover:bg-white/5"
               >
                 <MessageCircle className="w-4 h-4 shrink-0" />
-                <span>WhatsApp</span>
+                <span>WhatsApp +39 375 821 2541</span>
               </a>
             </div>
           </div>

@@ -50,7 +50,7 @@ export function FinalCTA() {
               {langContent.ctaPrimary}
             </Link>
             <a
-              href="https://wa.me/1234567890"
+              href="https://wa.me/393758212541"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-secondary bg-navy-900/90 hover:bg-navy-800 text-white border-2 border-white/20"

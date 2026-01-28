@@ -13,7 +13,7 @@ export function QuickContact() {
       subtitle: 'Reach out directly via email or WhatsApp',
       email: 'Email',
       whatsapp: 'WhatsApp',
-      emailText: 'fatemeh.bahman@gmail.com',
+      emailText: 'fatemeh.bahman40@gmail.com',
       whatsappText: 'Send a message on WhatsApp',
     },
     fa: {
@@ -21,7 +21,7 @@ export function QuickContact() {
       subtitle: 'مستقیماً از طریق ایمیل یا واتساپ تماس بگیرید',
       email: 'ایمیل',
       whatsapp: 'واتساپ',
-      emailText: 'fatemeh.bahman@gmail.com',
+      emailText: 'fatemeh.bahman40@gmail.com',
       whatsappText: 'ارسال پیام در واتساپ',
     },
   }
@@ -48,7 +48,7 @@ export function QuickContact() {
 
         <div className="flex flex-col sm:flex-row gap-6 max-w-2xl mx-auto">
           <motion.a
-            href="mailto:fatemeh.bahman@gmail.com"
+            href="mailto:fatemeh.bahman40@gmail.com"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -67,7 +67,7 @@ export function QuickContact() {
           </motion.a>
 
           <motion.a
-            href="https://wa.me/1234567890"
+            href="https://wa.me/393758212541"
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
