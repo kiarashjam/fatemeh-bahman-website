@@ -44,68 +44,44 @@ export function Footer() {
           {/* Quick Links */}
           <div>
             <h4 className="text-lg font-semibold mb-4">{content.quickLinks}</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/about"
-                  className="text-beige-200 hover:text-gold-400 transition-colors text-sm"
-                >
-                  {language === 'en' ? 'About' : 'درباره'}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/lessons"
-                  className="text-beige-200 hover:text-gold-400 transition-colors text-sm"
-                >
-                  {language === 'en' ? 'Lessons' : 'درس‌ها'}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/pricing"
-                  className="text-beige-200 hover:text-gold-400 transition-colors text-sm"
-                >
-                  {language === 'en' ? 'Pricing' : 'قیمت‌ها'}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/faq"
-                  className="text-beige-200 hover:text-gold-400 transition-colors text-sm"
-                >
-                  {language === 'en' ? 'FAQ' : 'سوالات متداول'}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-beige-200 hover:text-gold-400 transition-colors text-sm"
-                >
-                  {language === 'en' ? 'Contact' : 'تماس'}
-                </Link>
-              </li>
+            <ul className="space-y-1">
+              {[
+                { href: '/about', en: 'About', fa: 'درباره' },
+                { href: '/lessons', en: 'Lessons', fa: 'درس‌ها' },
+                { href: '/pricing', en: 'Pricing', fa: 'قیمت‌ها' },
+                { href: '/faq', en: 'FAQ', fa: 'سوالات متداول' },
+                { href: '/contact', en: 'Contact', fa: 'تماس' },
+              ].map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="block py-3 text-beige-200 hover:text-gold-400 transition-colors text-sm min-h-[44px] flex items-center touch-manipulation -mx-2 px-2 rounded-lg hover:bg-white/5"
+                  >
+                    {language === 'en' ? item.en : item.fa}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Contact */}
           <div>
             <h4 className="text-lg font-semibold mb-4">{content.contact}</h4>
-            <div className="space-y-3">
+            <div className="space-y-1">
               <a
-                href="mailto:fatemeh.bahman@example.com"
-                className="flex items-center gap-2 text-beige-200 hover:text-gold-400 transition-colors text-sm"
+                href="mailto:fatemeh.bahman@gmail.com"
+                className="flex items-center gap-2 py-3 text-beige-200 hover:text-gold-400 transition-colors text-sm min-h-[44px] touch-manipulation -mx-2 px-2 rounded-lg hover:bg-white/5"
               >
-                <Mail className="w-4 h-4" />
-                <span>fatemeh.bahman@example.com</span>
+                <Mail className="w-4 h-4 shrink-0" />
+                <span className="break-all">fatemeh.bahman@gmail.com</span>
               </a>
               <a
                 href="https://wa.me/1234567890"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-beige-200 hover:text-gold-400 transition-colors text-sm"
+                className="flex items-center gap-2 py-3 text-beige-200 hover:text-gold-400 transition-colors text-sm min-h-[44px] touch-manipulation -mx-2 px-2 rounded-lg hover:bg-white/5"
               >
-                <MessageCircle className="w-4 h-4" />
+                <MessageCircle className="w-4 h-4 shrink-0" />
                 <span>WhatsApp</span>
               </a>
             </div>

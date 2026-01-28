@@ -46,14 +46,42 @@ bash azure-deploy.sh
 3. Download the `.PublishSettings` file
 4. **Open the file** and copy ALL its contents
 
-### Step 3: Add GitHub Secret
+### Step 3: Add GitHub Secrets
 
-1. Go to your GitHub repository
-2. **Settings** → **Secrets and variables** → **Actions**
-3. Click **"New repository secret"**
-4. Name: `AZURE_WEBAPP_PUBLISH_PROFILE`
-5. Value: Paste the entire contents of the `.PublishSettings` file
-6. Click **"Add secret"**
+You need **two** secrets for the workflow to deploy:
+
+**Secret 1: `AZURE_WEBAPP_PUBLISH_PROFILE`**
+
+1. Go to your GitHub repository → **Settings** → **Secrets and variables** → **Actions**
+2. Click **"New repository secret"**
+3. Name: `AZURE_WEBAPP_PUBLISH_PROFILE`
+4. Value: Paste the entire contents of the `.PublishSettings` file (from Step 2)
+5. Click **"Add secret"**
+
+**Secret 2: `AZURE_CREDENTIALS`** (required for Azure login in the workflow)
+
+1. In Azure Portal, open **Microsoft Entra ID** (or **Azure Active Directory**) → **App registrations** → **New registration**
+2. Name: e.g. `github-actions-fatemeh` → **Register**
+3. Note the **Application (client) ID** and **Directory (tenant) ID**
+4. Go to **Certificates & secrets** → **New client secret** → Add description → **Add** → copy the **Value** (you won’t see it again)
+5. Go to **Subscriptions** in Azure Portal → your subscription → **Access control (IAM)** → **Add role assignment**
+   - Role: **Website Contributor** (or **Contributor**)
+   - Assign access to: **User, group, or service principal** → select the app you created → **Save**
+6. Create this JSON (replace placeholders with your values):
+
+```json
+{
+  "clientId": "<Application (client) ID>",
+  "clientSecret": "<client secret Value>",
+  "subscriptionId": "<your subscription ID>",
+  "tenantId": "<Directory (tenant) ID>"
+}
+```
+
+7. In GitHub: **Settings** → **Secrets and variables** → **Actions** → **New repository secret**
+8. Name: `AZURE_CREDENTIALS`
+9. Value: Paste the entire JSON (one line is fine)
+10. Click **"Add secret"**
 
 ### Step 4: Configure Web App Settings
 

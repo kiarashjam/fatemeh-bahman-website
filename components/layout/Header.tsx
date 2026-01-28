@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Menu, X, Languages, Moon, Sun } from 'lucide-react'
@@ -22,8 +22,10 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
-  const { language, setLanguage, t } = useLanguage()
+  const { language, setLanguage } = useLanguage()
   const { theme, toggleTheme } = useTheme()
+
+  const closeMenu = useCallback(() => setIsOpen(false), [])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -39,6 +41,33 @@ export function Header() {
   useEffect(() => {
     setIsOpen(false)
   }, [pathname])
+
+  // Body scroll lock when mobile menu is open
+  useEffect(() => {
+    if (typeof document === 'undefined') return
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+      document.body.style.touchAction = 'none'
+    } else {
+      document.body.style.overflow = ''
+      document.body.style.touchAction = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+      document.body.style.touchAction = ''
+    }
+  }, [isOpen])
+
+  // Close on Escape
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeMenu()
+    }
+    if (isOpen) {
+      window.addEventListener('keydown', handleEscape)
+      return () => window.removeEventListener('keydown', handleEscape)
+    }
+  }, [isOpen, closeMenu])
 
   const toggleLanguage = () => {
     setLanguage(language === 'en' ? 'fa' : 'en')
@@ -107,74 +136,119 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - larger touch target */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2"
-            aria-label="Toggle menu"
+            className="md:hidden p-3 -m-1 rounded-xl hover:bg-navy-100 dark:hover:bg-navy-800 transition-colors touch-manipulation"
+            aria-label={isOpen ? (language === 'en' ? 'Close menu' : 'بستن منو') : (language === 'en' ? 'Open menu' : 'باز کردن منو')}
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile: full-screen backdrop + slide-in drawer */}
         <AnimatePresence>
           {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden overflow-hidden"
-            >
-              <div className="mt-4 pb-4 border-t border-navy-200 dark:border-navy-700 pt-4">
-                <div className="flex flex-col gap-4">
-                  {navItems.map((item) => (
-                    <Link
+            <>
+              {/* Backdrop - tap to close */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 z-40 md:hidden bg-navy-900/50 dark:bg-black/60 backdrop-blur-sm"
+                onClick={closeMenu}
+              />
+              {/* Drawer - slides from end (right in LTR, left in RTL) */}
+              <motion.aside
+                id="mobile-menu"
+                role="dialog"
+                aria-modal="true"
+                aria-label={language === 'en' ? 'Navigation menu' : 'منوی ناوبری'}
+                initial={{ x: language === 'fa' ? '-100%' : '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: language === 'fa' ? '-100%' : '100%' }}
+                transition={{ type: 'tween', duration: 0.25, ease: [0.32, 0.72, 0, 1] }}
+                className={cn(
+                  'fixed top-0 bottom-0 w-[min(320px,85vw)] z-50 md:hidden',
+                  'bg-white dark:bg-navy-900 shadow-premium dark:shadow-premium-dark',
+                  'flex flex-col',
+                  language === 'fa' ? 'left-0' : 'right-0'
+                )}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-center justify-between p-4 border-b border-navy-100 dark:border-navy-700">
+                  <span className="text-lg font-semibold text-navy-900 dark:text-beige-50">
+                    {language === 'en' ? 'Menu' : 'منو'}
+                  </span>
+                  <button
+                    onClick={closeMenu}
+                    className="p-3 rounded-xl hover:bg-navy-100 dark:hover:bg-navy-800 transition-colors -m-1"
+                    aria-label={language === 'en' ? 'Close menu' : 'بستن منو'}
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+                <nav className="flex-1 overflow-y-auto p-4 flex flex-col gap-1">
+                  {navItems.map((item, i) => (
+                    <motion.div
                       key={item.key}
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className={cn(
-                        'text-base font-medium transition-colors hover:text-gold-500',
-                        pathname === item.href
-                          ? 'text-gold-500'
-                          : 'text-navy-700 dark:text-beige-200'
-                      )}
+                      initial={{ opacity: 0, x: language === 'fa' ? -12 : 12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.05 * i, duration: 0.2 }}
                     >
-                      {language === 'en' ? item.en : item.fa}
-                    </Link>
+                      <Link
+                        href={item.href}
+                        onClick={closeMenu}
+                        className={cn(
+                          'block w-full py-3.5 px-4 rounded-xl text-base font-medium transition-colors min-h-[44px] flex items-center touch-manipulation',
+                          pathname === item.href
+                            ? 'bg-gold-100 dark:bg-gold-900/30 text-gold-700 dark:text-gold-400'
+                            : 'text-navy-700 dark:text-beige-200 hover:bg-navy-100 dark:hover:bg-navy-800 hover:text-gold-600 dark:hover:text-gold-400'
+                        )}
+                      >
+                        {language === 'en' ? item.en : item.fa}
+                      </Link>
+                    </motion.div>
                   ))}
-                  <div className="flex items-center gap-4 pt-4 border-t border-navy-200 dark:border-navy-700">
+                </nav>
+                <div className="p-4 border-t border-navy-100 dark:border-navy-700 space-y-3">
+                  <div className="flex items-center gap-3">
                     <button
                       onClick={toggleTheme}
-                      className="p-2 rounded-lg hover:bg-navy-100 dark:hover:bg-navy-800 transition-colors"
+                      className="flex-1 flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-navy-100 dark:bg-navy-800 hover:bg-navy-200 dark:hover:bg-navy-700 transition-colors min-h-[44px] touch-manipulation"
                       aria-label={language === 'en' ? 'Toggle theme' : 'تغییر تم'}
                     >
                       {theme === 'dark' ? (
-                        <Sun className="w-5 h-5" />
+                        <Sun className="w-5 h-5 text-gold-400" />
                       ) : (
-                        <Moon className="w-5 h-5" />
+                        <Moon className="w-5 h-5 text-navy-600" />
                       )}
+                      <span className="text-sm font-medium">
+                        {theme === 'dark' ? (language === 'en' ? 'Light' : 'روشن') : (language === 'en' ? 'Dark' : 'تاریک')}
+                      </span>
                     </button>
                     <button
                       onClick={toggleLanguage}
-                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-navy-100 dark:bg-navy-800 hover:bg-navy-200 dark:hover:bg-navy-700 text-sm font-medium transition-colors"
+                      className="flex-1 flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-navy-100 dark:bg-navy-800 hover:bg-navy-200 dark:hover:bg-navy-700 transition-colors text-sm font-medium min-h-[44px] touch-manipulation"
                       aria-label={language === 'en' ? 'Change language' : 'تغییر زبان'}
                     >
                       <Languages className="w-4 h-4" />
                       <span>{language === 'en' ? 'FA' : 'EN'}</span>
                     </button>
-                    <Link
-                      href="/contact"
-                      onClick={() => setIsOpen(false)}
-                      className="px-4 py-2 bg-gold-500 hover:bg-gold-600 text-white rounded-lg font-medium transition-colors text-sm"
-                    >
-                      {language === 'en' ? 'Book Lesson' : 'رزرو درس'}
-                    </Link>
                   </div>
+                  <Link
+                    href="/contact"
+                    onClick={closeMenu}
+                    className="block w-full py-3.5 px-4 bg-gold-500 hover:bg-gold-600 text-white rounded-xl font-semibold text-center transition-colors min-h-[44px] flex items-center justify-center touch-manipulation"
+                  >
+                    {language === 'en' ? 'Book Lesson' : 'رزرو درس'}
+                  </Link>
                 </div>
-              </div>
-            </motion.div>
+              </motion.aside>
+            </>
           )}
         </AnimatePresence>
       </nav>

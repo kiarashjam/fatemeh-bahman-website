@@ -82,7 +82,7 @@ export function Hero() {
             <div className="relative w-full aspect-square max-w-md">
               <div className="absolute -inset-1 bg-gradient-to-br from-gold-400 via-gold-500 to-emerald-500 rounded-[2rem] opacity-80 blur-sm transform rotate-3" />
               <div className="absolute inset-0 bg-gradient-to-br from-gold-400/30 to-emerald-400/30 rounded-[2rem] transform -rotate-2" />
-              <div className="relative glass-card rounded-[2rem] p-10 flex items-center justify-center h-full min-h-[380px] overflow-hidden">
+              <div className="relative glass-card rounded-[2rem] p-6 sm:p-10 flex items-center justify-center h-full min-h-0 overflow-hidden">
                 <div className="text-center">
                   <div className="w-44 h-44 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold-100 to-beige-200 dark:from-navy-600 dark:to-navy-700 flex items-center justify-center ring-4 ring-gold-400/30 dark:ring-gold-500/20 shadow-premium overflow-hidden">
                     {!portraitError ? (

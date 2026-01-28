@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { DM_Sans, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/Header'
@@ -12,6 +12,13 @@ import { ErrorBoundary } from '@/components/ErrorBoundary'
 
 const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans', weight: ['400', '500', '600', '700'] })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair', weight: ['400', '500', '600', '700'] })
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: 'cover',
+}
 
 export const metadata: Metadata = {
   title: {
@@ -51,6 +58,11 @@ export const metadata: Metadata = {
       'en-US': '/',
       'fa-IR': '/',
     },
+  },
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/images/fatemeh.jpeg',
   },
 }
 
