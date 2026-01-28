@@ -1,6 +1,6 @@
 {
   "resourceGroup": "fatemeh-bahman-rg",
-  "location": "northeurope",
+  "location": "italynorth",
   "appServicePlan": {
     "name": "fatemeh-bahman-plan",
     "sku": "F1",
@@ -12,8 +12,9 @@
     "os": "linux"
   },
   "notes": {
-    "region": "North Italy (northeurope)",
+    "region": "Italy North (italynorth)",
     "cost": "Free tier (F1)",
-    "limitations": "App may sleep after inactivity, 60 minutes compute per day"
+    "limitations": "App may sleep after inactivity, 60 minutes compute per day",
+    "url": "https://fatemeh-bahman-website.azurewebsites.net"
   }
 }
