@@ -1,5 +1,9 @@
 'use client'
 
+/**
+ * BackToTop – floating button that appears after scrolling ~300px; smooth-scrolls to top.
+ * Position is RTL-aware (left vs right). Uses Framer Motion for enter/exit animation.
+ */
 import { useState, useEffect } from 'react'
 import { ArrowUp } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -10,6 +14,7 @@ export function BackToTop() {
   const [isVisible, setIsVisible] = useState(false)
   const { language } = useLanguage()
 
+  /** Show button when user has scrolled past 300px */
   useEffect(() => {
     if (typeof window === 'undefined') return
 

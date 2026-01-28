@@ -82,6 +82,7 @@ See `COMPLETE_SETUP.md` for full instructions.
 - `azure-setup.md` - Detailed Azure instructions
 - `SETUP.md` - Customization guide
 - `BUG_FIXES.md` - Bug fixes and improvements
+- **`COMMENTS_AND_REVIEW.md`** - **Comments** (project notes, structure, where things live) and **Review** (checklist for maintainers: accessibility, RTL, SEO, config)
 
 ## 🛠️ Tech Stack
 

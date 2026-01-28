@@ -1,3 +1,15 @@
+/**
+ * Section copy for the site – en/fa keys mirror structure (hero, highlights, whoIsThisFor, testimonials, etc.).
+ * Components use content[language] from useLanguage(); update here to change visible text.
+ *
+ * Comments (for maintainers):
+ * - Keep en and fa keys in sync when adding or editing sections (e.g. testimonials = reviews & comments).
+ * - Testimonials are used in the “Reviews & Comments” section on the homepage.
+ *
+ * Review:
+ * - When adding new copy, add both en and fa entries.
+ * - If a section has nested arrays (e.g. testimonials), ensure same length and order in both languages.
+ */
 export const content = {
   en: {
     hero: {

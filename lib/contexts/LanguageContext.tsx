@@ -1,5 +1,9 @@
 'use client'
 
+/**
+ * Language context – en/fa with persistence in localStorage and document dir/lang.
+ * Use useLanguage() in components; setLanguage() updates state, storage, and <html dir/lang>.
+ */
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 
 type Language = 'en' | 'fa'
@@ -12,6 +16,7 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
 
+/** Central translation map for shared keys (nav, hero CTAs). Section copy often lives in lib/content.ts */
 const translations: Record<Language, Record<string, string>> = {
   en: {
     'nav.home': 'Home',
@@ -42,6 +47,7 @@ const translations: Record<Language, Record<string, string>> = {
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>('fa')
 
+  /** Hydrate language from localStorage on mount (SSR-safe). */
   useEffect(() => {
     try {
       const saved = localStorage.getItem('language') as Language
@@ -54,6 +60,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
+  /** Set language, persist to localStorage, and update document dir/lang for RTL. */
   const setLanguage = (lang: Language) => {
     setLanguageState(lang)
     try {
@@ -67,6 +74,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  /** Keep <html dir> and lang in sync when language changes (RTL for Persian). */
   useEffect(() => {
     if (typeof document !== 'undefined') {
       document.documentElement.setAttribute('dir', language === 'fa' ? 'rtl' : 'ltr')
@@ -74,6 +82,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   }, [language])
 
+  /** Look up translation by key; falls back to key if missing. */
   const t = (key: string): string => {
     return translations[language][key] || key
   }
@@ -85,6 +94,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   )
 }
 
+/** Use language state and setLanguage; must be used inside LanguageProvider. */
 export function useLanguage() {
   const context = useContext(LanguageContext)
   if (context === undefined) {

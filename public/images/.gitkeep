@@ -1,3 +1,14 @@
-# Add your photo here:
+# ============================================
+# Public images folder – Persian teacher site
+# ============================================
+#
+# Add your photos here. They are served from /images/ in the app.
+#
+# Suggested files:
 # - portrait.jpg  → used on the homepage Hero (professional portrait)
 # - hero-bg.jpg   → optional background image (future use)
+#
+# Current: fatemeh.jpeg is used as the teacher portrait and as the
+# Apple touch icon (see app/layout.tsx metadata.icons.apple).
+#
+# Keep filenames lowercase and use .jpg or .webp for best compatibility.

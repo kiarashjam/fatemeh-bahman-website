@@ -1,5 +1,10 @@
 'use client'
 
+/**
+ * Testimonials (Reviews & Comments) – carousel of student reviews from lib/content.
+ * Shows one review at a time with prev/next and dot indicators; keyboard (ArrowLeft/Right) supported.
+ * Review: Add more reviews in content.en.testimonials and content.fa.testimonials to keep both languages in sync.
+ */
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react'
@@ -22,7 +27,7 @@ export function Testimonials() {
   }
 
   return (
-    <section className="section-padding bg-white dark:bg-navy-800">
+    <section className="section-padding bg-white dark:bg-navy-800" aria-label={language === 'en' ? 'Reviews and comments from students' : 'نظرات و کامنت‌های دانش‌آموزان'}>
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -31,17 +36,19 @@ export function Testimonials() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
+          {/* Section title: “Reviews & Comments” style; subtitle explains these are student voices */}
           <h2 className="section-title mb-4 section-title-accent">
-            {language === 'en' ? 'What Students Say' : 'نظرات دانش‌آموزان'}
+            {language === 'en' ? 'Reviews & Comments' : 'نظرات و کامنت‌ها'}
           </h2>
           <p className="text-lg text-navy-600 dark:text-beige-300">
             {language === 'en'
-              ? 'Hear from students who have transformed their Persian language skills'
-              : 'نظرات دانش‌آموزانی که مهارت‌های زبان فارسی خود را متحول کرده‌اند'}
+              ? 'What students say — reviews and comments from those who have transformed their Persian'
+              : 'نظرات و کامنت‌های دانش‌آموزانی که مهارت‌های زبان فارسی خود را متحول کرده‌اند'}
           </p>
         </motion.div>
 
         <div className="relative max-w-4xl mx-auto">
+          {/* Single visible review; AnimatePresence for enter/exit when index changes */}
           <AnimatePresence mode="wait">
             <motion.div
               key={currentIndex}
@@ -51,6 +58,7 @@ export function Testimonials() {
               transition={{ duration: 0.3 }}
               className="glass-card p-8 sm:p-12 rounded-2xl"
             >
+              {/* Star rating (1–5); data from content.testimonials[].rating */}
               <div className="flex gap-1 mb-4">
                 {[...Array(langContent.testimonials[currentIndex].rating)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 fill-gold-400 text-gold-400" />
@@ -70,6 +78,7 @@ export function Testimonials() {
             </motion.div>
           </AnimatePresence>
 
+          {/* Prev/Next: positioned outside card; Review: in RTL consider swapping arrow direction if needed */}
           <button
             onClick={prev}
             onKeyDown={(e) => {
@@ -97,17 +106,20 @@ export function Testimonials() {
             <ChevronRight className="w-6 h-6" />
           </button>
 
-          <div className="flex justify-center gap-2 mt-8">
+          {/* Dot indicators: current review gets wider and gold */}
+          <div className="flex justify-center gap-2 mt-8" role="tablist" aria-label={language === 'en' ? 'Review slides' : 'اسلایدهای نظرات'}>
             {langContent.testimonials.map((_, index) => (
               <button
                 key={index}
+                role="tab"
+                aria-selected={index === currentIndex}
+                aria-label={`${language === 'en' ? 'Review' : 'نظر'} ${index + 1}`}
                 onClick={() => setCurrentIndex(index)}
                 className={`w-2 h-2 rounded-full transition-all ${
                   index === currentIndex
                     ? 'bg-gold-500 w-8'
                     : 'bg-navy-300 dark:bg-navy-600'
                 }`}
-                aria-label={`Go to testimonial ${index + 1}`}
               />
             ))}
           </div>

@@ -1,5 +1,9 @@
 'use client'
 
+/**
+ * FloatingWhatsApp – fixed CTA link to WhatsApp (SITE_CONFIG.whatsappUrl).
+ * Shown on mobile only (md:hidden); position RTL-aware. Used for quick contact from any page.
+ */
 import { MessageCircle } from 'lucide-react'
 import { useLanguage } from '@/lib/contexts/LanguageContext'
 import { cn } from '@/lib/utils'

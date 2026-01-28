@@ -1,7 +1,13 @@
+/**
+ * Global styles – Tailwind layers, CSS variables, base (scroll, RTL, focus, reduced motion),
+ * and component utilities (section-padding, container-custom, gradient-text, etc.).
+ * Dark mode driven by <html class="dark"> from ThemeContext.
+ */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Design tokens: Persian-friendly font stack, brand gradients */
 :root {
   --font-vazir: 'Vazir', 'Tahoma', 'Arial', sans-serif;
   --gradient-gold-emerald: linear-gradient(135deg, #f1c40f 0%, #2ecc71 100%);
@@ -12,23 +18,26 @@
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
     @apply bg-white dark:bg-navy-900 text-navy-900 dark:text-beige-50 transition-colors duration-300;
   }
-  
+
+  /* RTL for Persian (fa); LanguageContext sets dir on <html> */
   [dir="rtl"] {
     direction: rtl;
   }
-  
+
   [dir="ltr"] {
     direction: ltr;
   }
 
+  /* Consistent focus ring for keyboard users */
   *:focus-visible {
     @apply outline-none ring-2 ring-gold-500 ring-offset-2 ring-offset-white dark:ring-offset-navy-900;
   }
 
+  /* Respect user preference for reduced motion */
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

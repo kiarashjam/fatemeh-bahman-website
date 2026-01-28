@@ -1,5 +1,9 @@
 'use client'
 
+/**
+ * Hero – full-viewport homepage hero: headline, subheadline, CTAs (Book Lesson / WhatsApp), and portrait.
+ * Content from lib/content; image from ASSETS.portrait with fallback if load fails.
+ */
 import { useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
@@ -12,6 +16,7 @@ import { ASSETS } from '@/lib/constants'
 export function Hero() {
   const { language } = useLanguage()
   const langContent = content[language]
+  /** If portrait fails to load we hide the image and keep layout intact */
   const [portraitError, setPortraitError] = useState(false)
 
   return (
@@ -61,6 +66,7 @@ export function Hero() {
               >
                 {langContent.hero.ctaPrimary}
               </Link>
+              {/* Review: WhatsApp number is hardcoded here; consider using SITE_CONFIG.whatsappUrl from constants */}
               <a
                 href="https://wa.me/393758212541"
                 target="_blank"
@@ -85,6 +91,7 @@ export function Hero() {
               <div className="relative glass-card rounded-[2rem] p-6 sm:p-10 flex items-center justify-center h-full min-h-0 overflow-hidden">
                 <div className="text-center">
                   <div className="w-44 h-44 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold-100 to-beige-200 dark:from-navy-600 dark:to-navy-700 flex items-center justify-center ring-4 ring-gold-400/30 dark:ring-gold-500/20 shadow-premium overflow-hidden">
+                    {/* Portrait from ASSETS.portrait; onError hides image and shows initials ف.ب */}
                     {!portraitError ? (
                       <Image
                         src={ASSETS.portrait}

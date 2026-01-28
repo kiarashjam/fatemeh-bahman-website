@@ -1,5 +1,9 @@
 'use client'
 
+/**
+ * Header – fixed top nav with desktop links, mobile drawer, language toggle, theme toggle, and CTA.
+ * Uses LanguageContext and ThemeContext; RTL-aware for Persian (fa).
+ */
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -9,6 +13,7 @@ import { useTheme } from '@/lib/contexts/ThemeContext'
 import { cn } from '@/lib/utils'
 import { motion, AnimatePresence } from 'framer-motion'
 
+/** Main nav links: key for i18n, href for routing, en/fa labels */
 const navItems = [
   { key: 'home', href: '/', en: 'Home', fa: 'خانه' },
   { key: 'about', href: '/about', en: 'About', fa: 'درباره' },
@@ -27,9 +32,10 @@ export function Header() {
 
   const closeMenu = useCallback(() => setIsOpen(false), [])
 
+  /** Track scroll to add background/blur when user scrolls (scrolled = scrollY > 20) */
   useEffect(() => {
     if (typeof window === 'undefined') return
-    
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
     }
@@ -37,12 +43,12 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Close mobile menu on route change
+  /** Close mobile menu on route change so user doesn’t land on new page with menu open */
   useEffect(() => {
     setIsOpen(false)
   }, [pathname])
 
-  // Body scroll lock when mobile menu is open
+  /** Body scroll lock when mobile menu is open; cleanup on close or unmount */
   useEffect(() => {
     if (typeof document === 'undefined') return
     if (isOpen) {
@@ -58,7 +64,7 @@ export function Header() {
     }
   }, [isOpen])
 
-  // Close on Escape
+  /** Close mobile menu on Escape for keyboard users */
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') closeMenu()
@@ -74,6 +80,7 @@ export function Header() {
   }
 
   return (
+    /* Review: ensure z-50 stays above page content but below modals if you add any */
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
@@ -84,6 +91,7 @@ export function Header() {
     >
       <nav className="container-custom section-padding py-4">
         <div className="flex items-center justify-between">
+          {/* Site name in Persian; always فاطمه بهمن regardless of language */}
           <Link
             href="/"
             className="text-2xl font-bold gradient-text font-persian tracking-tight"
@@ -91,6 +99,7 @@ export function Header() {
             فاطمه بهمن
           </Link>
 
+          {/* Desktop nav: hidden on small screens, shown from md up */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <Link

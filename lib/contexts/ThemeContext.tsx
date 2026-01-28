@@ -1,5 +1,9 @@
 'use client'
 
+/**
+ * Theme context – light/dark with persistence in localStorage and system preference fallback.
+ * Use useTheme() in components; toggleTheme() flips theme and updates <html class="dark">.
+ */
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 
 type Theme = 'light' | 'dark'
@@ -15,6 +19,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>('light')
   const [mounted, setMounted] = useState(false)
 
+  /** On mount: read saved theme or prefer system (prefers-color-scheme: dark). */
   useEffect(() => {
     setMounted(true)
     try {
@@ -33,6 +38,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     }
   }, [])
 
+  /** Apply theme to <html class="dark"> and persist to localStorage (after mount to avoid hydration mismatch). */
   useEffect(() => {
     if (mounted && typeof document !== 'undefined') {
       if (theme === 'dark') {
@@ -52,7 +58,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setTheme(prev => prev === 'light' ? 'dark' : 'light')
   }
 
-  // Always provide context value, even during SSR
+  /* Always provide context value, even during SSR, so useTheme() doesn’t throw before mount */
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
@@ -60,6 +66,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   )
 }
 
+/** Use theme state and toggleTheme; must be used inside ThemeProvider. */
 export function useTheme() {
   const context = useContext(ThemeContext)
   if (context === undefined) {

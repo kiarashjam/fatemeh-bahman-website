@@ -1,3 +1,7 @@
+/**
+ * Homepage – composition of section components in reading order.
+ * Each section is self-contained; order here defines the page flow.
+ */
 import { Hero } from '@/components/sections/Hero'
 import { Highlights } from '@/components/sections/Highlights'
 import { WhoIsThisFor } from '@/components/sections/WhoIsThisFor'

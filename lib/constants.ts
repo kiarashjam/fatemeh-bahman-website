@@ -1,9 +1,13 @@
-// Site-wide constants
+/**
+ * Site-wide constants – asset paths and config used across layout, metadata, and components.
+ * Update SITE_CONFIG.url and contact details when deploying.
+ */
 export const ASSETS = {
-  /** Professional portrait – Fatemeh's photo */
+  /** Professional portrait – Fatemeh's photo (Hero, metadata icons) */
   portrait: '/images/fatemeh.jpeg',
 } as const
 
+/** Site name, SEO, and contact (email, WhatsApp). */
 export const SITE_CONFIG = {
   name: 'Fatemeh Bahman',
   title: 'Fatemeh Bahman - Learn Persian with Clarity, Confidence, and Culture',

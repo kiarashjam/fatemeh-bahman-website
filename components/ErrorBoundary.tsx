@@ -1,10 +1,16 @@
 'use client'
 
+/**
+ * ErrorBoundary – class component that catches React errors in the tree and shows a fallback.
+ * Used in layout.tsx to prevent a single component crash from breaking the whole app.
+ * Optional fallback prop; otherwise shows a generic "Something went wrong" + Refresh.
+ */
 import { Component, ReactNode } from 'react'
 import { AlertCircle } from 'lucide-react'
 
 interface Props {
   children: ReactNode
+  /** Custom UI when an error is caught; if omitted, default message + Refresh is shown */
   fallback?: ReactNode
 }
 
@@ -19,10 +25,12 @@ export class ErrorBoundary extends Component<Props, State> {
     this.state = { hasError: false }
   }
 
+  /** Turn thrown error into state so we can render fallback */
   static getDerivedStateFromError(error: Error): State {
     return { hasError: true, error }
   }
 
+  /** Log error and stack for debugging */
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error('Error caught by boundary:', error, errorInfo)
   }

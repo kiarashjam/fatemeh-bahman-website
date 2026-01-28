@@ -1,5 +1,9 @@
 'use client'
 
+/**
+ * Footer – site-wide footer with bio, quick links, contact (email/WhatsApp), and copyright.
+ * Uses LanguageContext for en/fa; same link set as header (without Home).
+ */
 import Link from 'next/link'
 import { Mail, MessageCircle, Heart } from 'lucide-react'
 import { useLanguage } from '@/lib/contexts/LanguageContext'
@@ -9,6 +13,7 @@ const currentYear = new Date().getFullYear()
 export function Footer() {
   const { language } = useLanguage()
 
+  /** Footer copy in English and Persian */
   const footerContent = {
     en: {
       bio: 'Fatemeh Bahman is a retired teacher with 30+ years of experience teaching Persian language. Dedicated to helping students learn with clarity, confidence, and cultural understanding.',

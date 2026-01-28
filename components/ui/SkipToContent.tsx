@@ -1,5 +1,9 @@
 'use client'
 
+/**
+ * SkipToContent – accessibility link for keyboard users. Hidden by default (sr-only),
+ * visible on focus; jumps to #main-content (layout.tsx main). RTL-aware position.
+ */
 import { useLanguage } from '@/lib/contexts/LanguageContext'
 import { cn } from '@/lib/utils'
 
