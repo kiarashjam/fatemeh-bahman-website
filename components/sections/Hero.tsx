@@ -1,14 +1,18 @@
 'use client'
 
+import { useState } from 'react'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { MessageCircle } from 'lucide-react'
 import { useLanguage } from '@/lib/contexts/LanguageContext'
 import { content } from '@/lib/content'
+import { ASSETS } from '@/lib/constants'
 
 export function Hero() {
   const { language } = useLanguage()
   const langContent = content[language]
+  const [portraitError, setPortraitError] = useState(false)
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-mesh-light dark:bg-gradient-to-br dark:from-navy-950 dark:via-navy-900 dark:to-navy-950">
@@ -80,13 +84,25 @@ export function Hero() {
               <div className="absolute inset-0 bg-gradient-to-br from-gold-400/30 to-emerald-400/30 rounded-[2rem] transform -rotate-2" />
               <div className="relative glass-card rounded-[2rem] p-10 flex items-center justify-center h-full min-h-[380px] overflow-hidden">
                 <div className="text-center">
-                  <div className="w-44 h-44 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold-100 to-beige-200 dark:from-navy-600 dark:to-navy-700 flex items-center justify-center ring-4 ring-gold-400/30 dark:ring-gold-500/20 shadow-premium">
-                    <span className="text-5xl font-persian text-navy-700 dark:text-beige-200 font-bold">
-                      ف.ب
-                    </span>
+                  <div className="w-44 h-44 mx-auto mb-6 rounded-full bg-gradient-to-br from-gold-100 to-beige-200 dark:from-navy-600 dark:to-navy-700 flex items-center justify-center ring-4 ring-gold-400/30 dark:ring-gold-500/20 shadow-premium overflow-hidden">
+                    {!portraitError ? (
+                      <Image
+                        src={ASSETS.portrait}
+                        alt={langContent.hero.headline}
+                        width={176}
+                        height={176}
+                        className="w-full h-full object-cover"
+                        onError={() => setPortraitError(true)}
+                        unoptimized
+                      />
+                    ) : (
+                      <span className="text-5xl font-persian text-navy-700 dark:text-beige-200 font-bold">
+                        ف.ب
+                      </span>
+                    )}
                   </div>
                   <p className="text-sm text-navy-500 dark:text-beige-400 mt-2 font-medium">
-                    [Professional Portrait Placeholder]
+                    {portraitError ? '[Add your photo as public/images/portrait.jpg]' : 'Fatemeh Bahman'}
                   </p>
                 </div>
               </div>

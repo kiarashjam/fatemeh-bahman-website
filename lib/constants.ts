@@ -1,4 +1,9 @@
 // Site-wide constants
+export const ASSETS = {
+  /** Professional portrait – Fatemeh's photo */
+  portrait: '/images/fatemeh.jpeg',
+} as const
+
 export const SITE_CONFIG = {
   name: 'Fatemeh Bahman',
   title: 'Fatemeh Bahman - Learn Persian with Clarity, Confidence, and Culture',
